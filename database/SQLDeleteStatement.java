@@ -35,20 +35,20 @@ import java.util.Properties;
 //---------------------------------------------------------------------------------------------------------
 public class SQLDeleteStatement extends SQLStatement
 {
-    /**
-     *
-     * This handles only equality in the WHERE clause. This also
-     * expects that for numeric types in the WHERE clause, a separate
-     * Properties object containing the column name and numeric type
-     * indicator will be provided. For text types, no entry in this
-     * Properties object is necessary.
-     */
-    //------------------------------------------------------------
-    public SQLDeleteStatement(Properties schema, 		// the table schema
-    						  Properties whereValues	// the values to delete
-							 )
+	/**
+	 *
+	 * This handles only equality in the WHERE clause. This also
+	 * expects that for numeric types in the WHERE clause, a separate
+	 * Properties object containing the column name and numeric type
+	 * indicator will be provided. For text types, no entry in this
+	 * Properties object is necessary.
+	 */
+	//------------------------------------------------------------
+	public SQLDeleteStatement(Properties schema, 		// the table schema
+							  Properties whereValues	// the values to delete
+	)
 	{
-    	super();	// implicit, doesn't do anything, but what the hell
+		super();	// implicit, doesn't do anything, but what the hell
 
 		// Begin construction of the actual SQL statement
 		theSQLStatement = "DELETE FROM " + schema.getProperty("TableName");

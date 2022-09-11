@@ -35,19 +35,19 @@ import java.util.Properties;
 //---------------------------------------------------------------------------------------------------------
 public class SQLInsertStatement extends SQLStatement
 {
-    /**
-     *
-     * This handles only equality in the WHERE clause. This also
-     * expects that for numeric types in the WHERE clause, a separate
-     * Properties object containing the column name and numeric type
-     * indicator will be provided. For text types, no entry in this
-     * Properties object is necessary.
-     */
-    //------------------------------------------------------------
-    public SQLInsertStatement(Properties schema, 		// the name of the table to insert into
-    						  Properties insertValues)	// the values to insert
+	/**
+	 *
+	 * This handles only equality in the WHERE clause. This also
+	 * expects that for numeric types in the WHERE clause, a separate
+	 * Properties object containing the column name and numeric type
+	 * indicator will be provided. For text types, no entry in this
+	 * Properties object is necessary.
+	 */
+	//------------------------------------------------------------
+	public SQLInsertStatement(Properties schema, 		// the name of the table to insert into
+							  Properties insertValues)	// the values to insert
 	{
-    	super();	// implicit, doesn't do anything, but what the hell
+		super();	// implicit, doesn't do anything, but what the hell
 
 		// Begin construction of the actual SQL statement
 		theSQLStatement = "INSERT INTO " + schema.getProperty("TableName");
@@ -62,10 +62,10 @@ public class SQLInsertStatement extends SQLStatement
 
 		while (theValuesColumns.hasMoreElements() == true)
 		{
-		
+
 			if ((theValuesString.equals("") == true) && (theColumnNamesList.equals("") == true))
 			{
-		  		theValuesString += " VALUES ( ";
+				theValuesString += " VALUES ( ";
 				theColumnNamesList += " ( ";
 			}
 			else
@@ -74,7 +74,7 @@ public class SQLInsertStatement extends SQLStatement
 				theColumnNamesList += " , ";
 			}
 
-		
+
 			String theColumnName = (String)theValuesColumns.nextElement();
 			// System.out.println("The column name is " + theColumnName);
 			String theColumnValue = insertEscapes(insertValues.getProperty(theColumnName));
@@ -111,7 +111,7 @@ public class SQLInsertStatement extends SQLStatement
 		theSQLStatement += theValuesString;
 
 		theSQLStatement += ";";
-	
+
 	}
 }
 

@@ -35,14 +35,14 @@ public abstract class SQLStatement
 	private final char characterToEscape = '\'';
 	private final String escapeString = "\\";
 	protected String theSQLStatement;		// contains the resulting SQL statement
-    
+
 
 	/**
-     * In order to facilitate having apostrophe's in the data in the DB table
-     * columns, we need to insert the '\\' as escape string in the data values. This method
-     * accomplishes that.
-     * 
-     */
+	 * In order to facilitate having apostrophe's in the data in the DB table
+	 * columns, we need to insert the '\\' as escape string in the data values. This method
+	 * accomplishes that.
+	 *
+	 */
 	//----------------------------------------------------------------------
 	protected String insertEscapes(String inString)
 	{
@@ -58,7 +58,7 @@ public abstract class SQLStatement
 			outString += prefix;
 			outString += escapeString;
 			outString += inString.charAt(indexOfEscapeChar);
-			
+
 			if (indexOfEscapeChar + 1 >= inStringLen)
 			{
 				allDone = true;
@@ -73,11 +73,11 @@ public abstract class SQLStatement
 		} // while
 
 		outString += inString;
-		
+
 		return outString;
 	}
-	
-	
+
+
 	// override the toString method to output the constructed string
 	//----------------------------------------------------------
 	public String toString()
@@ -106,4 +106,4 @@ public abstract class SQLStatement
 //	
 //	Revision 1.1  2003/09/07 21:15:01  tomb
 //	Initial checkin, extracted from Persistable.java.
-//	
+//

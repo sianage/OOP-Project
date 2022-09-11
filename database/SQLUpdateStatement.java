@@ -34,28 +34,28 @@ import java.util.Properties;
 // Beginning of DatabaseManipulator class
 //---------------------------------------------------------------------------------------------------------
 public class SQLUpdateStatement extends SQLStatement
-{  
-    /**
-     *
-     * This handles only equality in the WHERE clause. This also 
-     * expects that for numeric types in the WHERE clause, a separate
-     * Properties object containing the column name and numeric type
-     * indicator will be provided. For text types, no entry in this
-     * Properties object is necessary.
-     */
-    //------------------------------------------------------------
-    public SQLUpdateStatement(Properties schema,		// the table's schema
-    						Properties updateValues,	// the values to update
-							Properties whereValues) 	// condition update values
-    {
-    	super();	// implicit, doesn't do anything, but what the hell
-    	
+{
+	/**
+	 *
+	 * This handles only equality in the WHERE clause. This also
+	 * expects that for numeric types in the WHERE clause, a separate
+	 * Properties object containing the column name and numeric type
+	 * indicator will be provided. For text types, no entry in this
+	 * Properties object is necessary.
+	 */
+	//------------------------------------------------------------
+	public SQLUpdateStatement(Properties schema,		// the table's schema
+							  Properties updateValues,	// the values to update
+							  Properties whereValues) 	// condition update values
+	{
+		super();	// implicit, doesn't do anything, but what the hell
+
 		// Begin construction of the actual SQL statement
 		theSQLStatement = "UPDATE " + schema.getProperty("TableName");
-		
+
 		// Construct the SET part of the SQL statement
 		String theSetString = "";
-		
+
 		// Now, traverse the update Properties object (used for creating
 		// the SET part of this statement)
 		Enumeration theSetColumns = updateValues.propertyNames();
@@ -71,13 +71,13 @@ public class SQLUpdateStatement extends SQLStatement
 			}
 
 			String theColumnName = (String)theSetColumns.nextElement();
-			/* DEBUG
+
 			System.out.println("SQLUpdateStatement.<init> : Column Name = " +
-				theColumnName + ". Length = " + theColumnName.length()); */
+					theColumnName + ". Length = " + theColumnName.length());
 			String theColumnValue = insertEscapes(updateValues.getProperty(theColumnName));
-					
+
 			String updateType = schema.getProperty(theColumnName);
-			
+
 			// if the type is numeric, do NOT include quotes
 			if (updateType.equals("numeric") == true)
 			{
@@ -89,7 +89,7 @@ public class SQLUpdateStatement extends SQLStatement
 				theSetString += theColumnName + " = '" + theColumnValue + "'";
 			}
 		}
-	  
+
 		theSQLStatement += theSetString;
 
 		// Now, construct the WHERE part of the SQL statement
@@ -103,7 +103,7 @@ public class SQLUpdateStatement extends SQLStatement
 			{
 				if (theWhereString.equals(""))
 				{
-		  			theWhereString += " WHERE ";
+					theWhereString += " WHERE ";
 				}
 				else
 				{
@@ -113,9 +113,9 @@ public class SQLUpdateStatement extends SQLStatement
 				String theColumnName = (String)theWhereColumns.nextElement();
 				// DEBUG System.out.println("The column name is " + theColumnName);
 				String theColumnValue = insertEscapes(whereValues.getProperty(theColumnName));
-	
+
 				String whereType = schema.getProperty(theColumnName);
-						
+
 				// if the type is numeric, do NOT include quotes
 				if (whereType.equals("numeric") == true)
 				{
@@ -125,17 +125,17 @@ public class SQLUpdateStatement extends SQLStatement
 				{
 					// must the a text type, include the quotes
 					theWhereString += theColumnName + " = '" + theColumnValue + "'";
-	
-				}	
+
+				}
 			}
 		}
-	  
+
 		theSQLStatement += theWhereString;
-		
+
 		theSQLStatement += ";";
-		
+
 		// DEBUG System.out.println("SQL Query Statement = " + theSQLStatement);
-		
+
 	}
 }
 
@@ -161,4 +161,4 @@ public class SQLUpdateStatement extends SQLStatement
 //	
 //	Revision 1.1  2003/10/01 01:21:37  tomb
 //	Initial checkin, reflects behavior extracted from EasyVideo DatabaseMutator and Accessor.
-//	
+//
