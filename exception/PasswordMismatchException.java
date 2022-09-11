@@ -26,19 +26,19 @@ package exception;
 
 // local imports
 
-/** 
+/**
  * This class indicates an exception that is thrown if passwords
  * don't match
- * 
+ *
  */
 //--------------------------------------------------------------
 public class PasswordMismatchException
-	extends Exception
-{	
+		extends Exception
+{
 	/**
 	 * Constructor with message
 	 *
-	 * @param mesg The message associated with the exception
+	 * @param /mesg The message associated with the exception
 	 */
 	//--------------------------------------------------------
 	public PasswordMismatchException(String message)
@@ -47,7 +47,7 @@ public class PasswordMismatchException
 	}
 }
 
-		
+
 
 //**************************************************************
 //	Revision History:
@@ -55,7 +55,7 @@ public class PasswordMismatchException
 //	$Log: PasswordMismatchException.java,v $
 //	Revision 1.1  2004/06/18 20:36:26  smitra
 //	First check in
-//	
+//
 //	Revision 1.1  2004/06/17 04:40:56  smitra
 //	First check in
-//	
+//
