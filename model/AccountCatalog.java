@@ -24,17 +24,17 @@ public class AccountCatalog  extends EntityBase implements IView
 
 	// constructor for this class
 	//----------------------------------------------------------
-	public AccountCatalog( AccountHolder cust) throws
-		Exception
+	public AccountCatalog( Worker cust) throws
+			Exception
 	{
 		super(myTableName);
 
 		if (cust == null)
 		{
 			new Event(Event.getLeafLevelClassName(this), "<init>",
-				"Missing account holder information", Event.FATAL);
+					"Missing account holder information", Event.FATAL);
 			throw new Exception
-				("UNEXPECTED ERROR: AccountCatalog.<init>: account holder information is null");
+					("UNEXPECTED ERROR: AccountCatalog.<init>: account holder information is null");
 		}
 
 		String accountHolderId = (String)cust.getState("ID");
@@ -42,9 +42,9 @@ public class AccountCatalog  extends EntityBase implements IView
 		if (accountHolderId == null)
 		{
 			new Event(Event.getLeafLevelClassName(this), "<init>",
-				"Data corrupted: Account Holder has no id in database", Event.FATAL);
+					"Data corrupted: Account Holder has no id in database", Event.FATAL);
 			throw new Exception
-			 ("UNEXPECTED ERROR: AccountCatalog.<init>: Data corrupted: account holder has no id in repository");
+					("UNEXPECTED ERROR: AccountCatalog.<init>: Data corrupted: account holder has no id in repository");
 		}
 
 		String query = "SELECT AccountNumber FROM " + myTableName + " WHERE (OwnerID = " + accountHolderId + ")";
@@ -71,7 +71,7 @@ public class AccountCatalog  extends EntityBase implements IView
 		else
 		{
 			throw new InvalidPrimaryKeyException("No accounts for customer : "
-				+ accountHolderId + ". Name : " + cust.getState("Name"));
+					+ accountHolderId + ". Name : " + cust.getState("Name"));
 		}
 
 	}

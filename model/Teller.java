@@ -33,7 +33,7 @@ public class Teller implements IView, IModel
 	private Properties dependencies;
 	private ModelRegistry myRegistry;
 
-	private AccountHolder myAccountHolder;
+	private Worker myAccountHolder;
 
 	// GUI Components
 	private Hashtable<String, Scene> myViews;
@@ -55,7 +55,7 @@ public class Teller implements IView, IModel
 		if(myRegistry == null)
 		{
 			new Event(Event.getLeafLevelClassName(this), "Teller",
-				"Could not instantiate Registry", Event.ERROR);
+					"Could not instantiate Registry", Event.ERROR);
 		}
 
 		// STEP 3.2: Be sure to set the dependencies correctly
@@ -122,16 +122,7 @@ public class Teller implements IView, IModel
 
 		if (key.equals("Login") == true)
 		{
-			if (value != null)
-			{
-				loginErrorMessage = "";
 
-				boolean flag = loginAccountHolder((Properties)value);
-				if (flag == true)
-				{
-					createAndShowTransactionChoiceView();
-				}
-			}
 		}
 		else
 		if (key.equals("CancelTransaction") == true)
@@ -140,8 +131,8 @@ public class Teller implements IView, IModel
 		}
 		else
 		if ((key.equals("Deposit") == true) || (key.equals("Withdraw") == true) ||
-			(key.equals("Transfer") == true) || (key.equals("BalanceInquiry") == true) ||
-			(key.equals("ImposeServiceCharge") == true))
+				(key.equals("Transfer") == true) || (key.equals("BalanceInquiry") == true) ||
+				(key.equals("ImposeServiceCharge") == true))
 		{
 			String transType = key;
 
@@ -180,26 +171,7 @@ public class Teller implements IView, IModel
 	 * Login AccountHolder corresponding to user name and password.
 	 */
 	//----------------------------------------------------------
-	public boolean loginAccountHolder(Properties props)
-	{
-		try
-		{
-			myAccountHolder = new AccountHolder(props);
-			// DEBUG System.out.println("Account Holder: " + myAccountHolder.getState("Name") + " successfully logged in");
-			return true;
-		}
-		catch (InvalidPrimaryKeyException ex)
-		{
-				loginErrorMessage = "ERROR: " + ex.getMessage();
-				return false;
-		}
-		catch (PasswordMismatchException exec)
-		{
 
-				loginErrorMessage = "ERROR: " + exec.getMessage();
-				return false;
-		}
-	}
 
 
 	/**
@@ -213,7 +185,7 @@ public class Teller implements IView, IModel
 		try
 		{
 			Transaction trans = TransactionFactory.createTransaction(
-				transactionType, myAccountHolder);
+					transactionType, myAccountHolder);
 
 			trans.subscribe("CancelTransaction", this);
 			trans.stateChangeRequest("DoYourJob", "");
@@ -231,7 +203,7 @@ public class Teller implements IView, IModel
 	private void createAndShowTransactionChoiceView()
 	{
 		Scene currentScene = (Scene)myViews.get("TransactionChoiceView");
-		
+
 		if (currentScene == null)
 		{
 			// create our initial view
@@ -239,11 +211,11 @@ public class Teller implements IView, IModel
 			currentScene = new Scene(newView);
 			myViews.put("TransactionChoiceView", currentScene);
 		}
-				
+
 
 		// make the view visible by installing it into the frame
 		swapToView(currentScene);
-		
+
 	}
 
 	//------------------------------------------------------------
@@ -258,9 +230,9 @@ public class Teller implements IView, IModel
 			currentScene = new Scene(newView);
 			myViews.put("TellerView", currentScene);
 		}
-				
+
 		swapToView(currentScene);
-		
+
 	}
 
 
@@ -288,23 +260,22 @@ public class Teller implements IView, IModel
 	public void swapToView(Scene newScene)
 	{
 
-		
+
 		if (newScene == null)
 		{
 			System.out.println("Teller.swapToView(): Missing view for display");
 			new Event(Event.getLeafLevelClassName(this), "swapToView",
-				"Missing view for display ", Event.ERROR);
+					"Missing view for display ", Event.ERROR);
 			return;
 		}
 
 		myStage.setScene(newScene);
 		myStage.sizeToScene();
-		
-			
+
+
 		//Place in center
 		WindowPosition.placeCenter(myStage);
 
 	}
 
 }
-

@@ -5,6 +5,8 @@ package model;
 import java.util.Hashtable;
 import java.util.Properties;
 import java.util.Vector;
+
+import com.sun.corba.se.impl.ior.WireObjectKeyTemplate;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 
@@ -30,7 +32,7 @@ abstract public class Transaction implements IView, IModel
 	protected Stage myStage;
 	protected Hashtable<String, Scene> myViews;
 
-	protected AccountHolder myCust;
+	protected Worker myCust;
 
 	protected Vector myAccountIDs;
 	// GUI Components
@@ -43,7 +45,7 @@ abstract public class Transaction implements IView, IModel
 	 *
 	 */
 	//----------------------------------------------------------
-	protected Transaction(AccountHolder cust) throws Exception
+	protected Transaction(Worker cust) throws Exception
 	{
 
 		myStage = MainStageContainer.getInstance();
@@ -54,7 +56,7 @@ abstract public class Transaction implements IView, IModel
 		if(myRegistry == null)
 		{
 			new Event(Event.getLeafLevelClassName(this), "Transaction",
-				"Could not instantiate Registry", Event.ERROR);
+					"Could not instantiate Registry", Event.ERROR);
 		}
 		setDependencies();
 
@@ -77,18 +79,18 @@ abstract public class Transaction implements IView, IModel
 
 		try
 		{
-			
+
 			catalog = new AccountCatalog(myCust);
 			myAccountIDs = (Vector)catalog.getState("AccountNumberList");
-			
+
 			Scene newScene = createView();
-			
+
 			swapToView(newScene);
 
 		}
 		catch (Exception ex)
 		{
-				new Event(Event.getLeafLevelClassName(this), "Transaction",
+			new Event(Event.getLeafLevelClassName(this), "Transaction",
 					"Could not find any accounts for " + myCust.getState("ID"), Event.ERROR);
 		}
 	}
@@ -132,7 +134,7 @@ abstract public class Transaction implements IView, IModel
 	 */
 	//----------------------------------------------------------
 	protected Account createAccount(String accountNumber) throws
-		InvalidPrimaryKeyException
+			InvalidPrimaryKeyException
 	{
 		return new Account(accountNumber);
 	}
@@ -146,24 +148,23 @@ abstract public class Transaction implements IView, IModel
 	//-----------------------------------------------------------------------------
 	public void swapToView(Scene newScene)
 	{
-		
+
 		if (newScene == null)
 		{
 			System.out.println("Transaction.swapToView(): Missing view for display");
 			new Event(Event.getLeafLevelClassName(this), "swapToView",
-				"Missing view for display ", Event.ERROR);
+					"Missing view for display ", Event.ERROR);
 			return;
 		}
 
-		
+
 		myStage.setScene(newScene);
 		myStage.sizeToScene();
-		
-			
+
+
 		//Place in center
 		WindowPosition.placeCenter(myStage);
 
 	}
 
 }
-
