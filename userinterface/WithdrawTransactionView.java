@@ -74,7 +74,7 @@ public class WithdrawTransactionView extends View
 	private Node createTitle()
 	{
 		HBox container = new HBox();
-		container.setAlignment(Pos.CENTER);	
+		container.setAlignment(Pos.CENTER);
 
 		Text titleText = new Text(" Brockport Bank ATM ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -82,7 +82,7 @@ public class WithdrawTransactionView extends View
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
 		container.getChildren().add(titleText);
-		
+
 		return container;
 	}
 
@@ -93,10 +93,10 @@ public class WithdrawTransactionView extends View
 		VBox vbox = new VBox(10);
 
 		GridPane grid = new GridPane();
-        	grid.setAlignment(Pos.CENTER);
-       		grid.setHgap(10);
-        	grid.setVgap(10);
-        	grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		// data entry fields
 		Text accountLabel = new Text("Withdrawal account : ");
@@ -116,41 +116,41 @@ public class WithdrawTransactionView extends View
 		amount = new TextField();
 		amount.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-			processAction(e);
-		     }
+			@Override
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
 		});
 		grid.add(amount, 1, 1);
 
 		submitButton = new Button("Submit");
- 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
+		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		     	clearErrorMessage(); 
-			// do the deposit
-			processAction(e);
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				clearErrorMessage();
+				// do the deposit
+				processAction(e);
+			}
+		});
 
 		cancelButton = new Button("Back");
- 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-			/**
-			 * Process the Cancel button.
-			 * The ultimate result of this action is that the transaction will tell the teller to
-			 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
-			 * It simply tells its model (controller) that the withdraw transaction was canceled, and leaves it
-			 * to the model to decide to tell the teller to do the switch back.
-	 		*/
-			//----------------------------------------------------------
-       		     	clearErrorMessage();
-			myModel.stateChangeRequest("CancelWithdraw", null);   
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				/**
+				 * Process the Cancel button.
+				 * The ultimate result of this action is that the transaction will tell the teller to
+				 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
+				 * It simply tells its model (controller) that the withdraw transaction was canceled, and leaves it
+				 * to the model to decide to tell the teller to do the switch back.
+				 */
+				//----------------------------------------------------------
+				clearErrorMessage();
+				myModel.stateChangeRequest("CancelWithdraw", null);
+			}
+		});
 
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
@@ -242,7 +242,7 @@ public class WithdrawTransactionView extends View
 	 */
 	//----------------------------------------------------------
 	private void processAccountnumberAndAmount(String accountNumber,
-		String amount)
+											   String amount)
 	{
 		Properties props = new Properties();
 		props.setProperty("AccountNumber", accountNumber);
@@ -250,7 +250,7 @@ public class WithdrawTransactionView extends View
 		myModel.stateChangeRequest("DoWithdraw", props);
 	}
 
-	
+
 
 	//---------------------------------------------------------
 	public void updateState(String key, Object value)

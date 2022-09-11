@@ -73,12 +73,12 @@ public class DepositTransactionView extends View
 	//-------------------------------------------------------------
 	private Node createTitle()
 	{
-		
+
 		Text titleText = new Text("       Brockport Bank ATM          ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
-		
+
 		return titleText;
 	}
 
@@ -89,10 +89,10 @@ public class DepositTransactionView extends View
 		VBox vbox = new VBox(10);
 
 		GridPane grid = new GridPane();
-        	grid.setAlignment(Pos.CENTER);
-       		grid.setHgap(10);
-        	grid.setVgap(10);
-        	grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		Label accountLabel = new Label("Account To Deposit : ");
 		grid.add(accountLabel, 0, 0);
@@ -102,34 +102,34 @@ public class DepositTransactionView extends View
 		grid.add(accountNumbers, 1, 0);
 
 		submitButton = new Button("Submit");
- 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
+		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		     	clearErrorMessage(); 
-			// do the deposit
-			String selectedAccountNumber = accountNumbers.getValue();
-			processAccountNumber(selectedAccountNumber);  
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				clearErrorMessage();
+				// do the deposit
+				String selectedAccountNumber = accountNumbers.getValue();
+				processAccountNumber(selectedAccountNumber);
+			}
+		});
 
 		cancelButton = new Button("Back");
- 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-			/**
-			 * Process the Cancel button.
-			 * The ultimate result of this action is that the transaction will tell the teller to
-			 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
-			 * It simply tells its model (controller) that the deposit transaction was canceled, and leaves it
-			 * to the model to decide to tell the teller to do the switch back.
-	 		*/
-			//----------------------------------------------------------
-       		     	clearErrorMessage();
-			myModel.stateChangeRequest("CancelDeposit", null);   
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				/**
+				 * Process the Cancel button.
+				 * The ultimate result of this action is that the transaction will tell the teller to
+				 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
+				 * It simply tells its model (controller) that the deposit transaction was canceled, and leaves it
+				 * to the model to decide to tell the teller to do the switch back.
+				 */
+				//----------------------------------------------------------
+				clearErrorMessage();
+				myModel.stateChangeRequest("CancelDeposit", null);
+			}
+		});
 
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
@@ -142,7 +142,7 @@ public class DepositTransactionView extends View
 		return vbox;
 	}
 
-	
+
 	// Create the status log field
 	//-------------------------------------------------------------
 	private MessageView createStatusLog(String initialMessage)
@@ -172,7 +172,7 @@ public class DepositTransactionView extends View
 		}
 	}
 
-	
+
 	/**
 	 * Process account number selected by user.
 	 * Action is to pass this info on to the transaction object.

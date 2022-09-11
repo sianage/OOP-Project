@@ -76,13 +76,13 @@ public class TellerView extends View
 	//-------------------------------------------------------------
 	private Node createTitle()
 	{
-		
+
 		Text titleText = new Text("       Brockport Bank ATM          ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
-		
-	
+
+
 		return titleText;
 	}
 
@@ -91,46 +91,46 @@ public class TellerView extends View
 	private GridPane createFormContents()
 	{
 		GridPane grid = new GridPane();
-        	grid.setAlignment(Pos.CENTER);
-       		grid.setHgap(10);
-        	grid.setVgap(10);
-        	grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		// data entry fields
 		Label userName = new Label("User ID:");
-        	grid.add(userName, 0, 0);
+		grid.add(userName, 0, 0);
 
 		userid = new TextField();
 		userid.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		     	processAction(e);    
-            	     }
-        	});
-        	grid.add(userid, 1, 0);
+			@Override
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+		grid.add(userid, 1, 0);
 
 		Label pw = new Label("Password:");
-        	grid.add(pw, 0, 1);
+		grid.add(pw, 0, 1);
 
 		password = new PasswordField();
 		password.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		     	processAction(e);    
-            	     }
-        	});
-        	grid.add(password, 1, 1);
+			@Override
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
+		grid.add(password, 1, 1);
 
 		submitButton = new Button("Submit");
- 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
+		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		     	processAction(e);    
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
+		});
 
 		HBox btnContainer = new HBox(10);
 		btnContainer.setAlignment(Pos.BOTTOM_RIGHT);
@@ -140,7 +140,7 @@ public class TellerView extends View
 		return grid;
 	}
 
-	
+
 
 	// Create the status log field
 	//-------------------------------------------------------------
@@ -189,7 +189,7 @@ public class TellerView extends View
 	 */
 	//----------------------------------------------------------
 	private void processUserIDAndPassword(String useridString,
-		String passwordString)
+										  String passwordString)
 	{
 		Properties props = new Properties();
 		props.setProperty("ID", useridString);
@@ -234,4 +234,3 @@ public class TellerView extends View
 	}
 
 }
-

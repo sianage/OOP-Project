@@ -67,15 +67,15 @@ public class TransferTransactionView extends View
 		populateFields();
 
 		myModel.subscribe("TransactionError", this);
-	}	
+	}
 
-	
+
 	// Create the title container
 	//-------------------------------------------------------------
 	private Node createTitle()
 	{
 		HBox container = new HBox();
-		container.setAlignment(Pos.CENTER);	
+		container.setAlignment(Pos.CENTER);
 
 		Text titleText = new Text(" Brockport Bank ATM ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
@@ -83,7 +83,7 @@ public class TransferTransactionView extends View
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
 		container.getChildren().add(titleText);
-		
+
 		return container;
 	}
 
@@ -95,10 +95,10 @@ public class TransferTransactionView extends View
 		VBox vbox = new VBox(10);
 
 		GridPane grid = new GridPane();
-        	grid.setAlignment(Pos.CENTER);
-       		grid.setHgap(10);
-        	grid.setVgap(10);
-        	grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		Text sourceAccountLabel = new Text("FROM account : ");
 		sourceAccountLabel.setWrappingWidth(150);
@@ -126,41 +126,41 @@ public class TransferTransactionView extends View
 		amount = new TextField();
 		amount.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-			processAction(e);
-		     }
+			@Override
+			public void handle(ActionEvent e) {
+				processAction(e);
+			}
 		});
 		grid.add(amount, 1, 2);
 
 		submitButton = new Button("Submit");
- 		submitButton.setOnAction(new EventHandler<ActionEvent>() {
+		submitButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-       		     	clearErrorMessage(); 
-			// do the deposit
-			processAction(e);
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				clearErrorMessage();
+				// do the deposit
+				processAction(e);
+			}
+		});
 
 		cancelButton = new Button("Back");
- 		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-			/**
-			 * Process the Cancel button.
-			 * The ultimate result of this action is that the transaction will tell the teller to
-			 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
-			 * It simply tells its model (controller) that the transfer transaction was canceled, and leaves it
-			 * to the model to decide to tell the teller to do the switch back.
-	 		*/
-			//----------------------------------------------------------
-       		     	clearErrorMessage();
-			myModel.stateChangeRequest("CancelTransfer", null);   
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				/**
+				 * Process the Cancel button.
+				 * The ultimate result of this action is that the transaction will tell the teller to
+				 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
+				 * It simply tells its model (controller) that the transfer transaction was canceled, and leaves it
+				 * to the model to decide to tell the teller to do the switch back.
+				 */
+				//----------------------------------------------------------
+				clearErrorMessage();
+				myModel.stateChangeRequest("CancelTransfer", null);
+			}
+		});
 
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
@@ -173,7 +173,7 @@ public class TransferTransactionView extends View
 		return vbox;
 	}
 
-	
+
 	// Create the status log field
 	//-------------------------------------------------------------
 	private MessageView createStatusLog(String initialMessage)
@@ -200,9 +200,9 @@ public class TransferTransactionView extends View
 			if (sourceAccountNumbers.getItems().size() > 0)
 			{
 				sourceAccountNumbers.setValue(
-					sourceAccountNumbers.getItems().get(0));
+						sourceAccountNumbers.getItems().get(0));
 				destAccountNumbers.setValue(
-					destAccountNumbers.getItems().get(0));
+						destAccountNumbers.getItems().get(0));
 			}
 		}
 
@@ -264,7 +264,7 @@ public class TransferTransactionView extends View
 	 */
 	//----------------------------------------------------------
 	private void processAccountnumbersAndAmount(String sourceAccountNumber,
-		String destAccountNumber, String amount)
+												String destAccountNumber, String amount)
 	{
 
 		Properties props = new Properties();
@@ -303,5 +303,4 @@ public class TransferTransactionView extends View
 		statusLog.clearErrorMessage();
 	}
 }
-
 

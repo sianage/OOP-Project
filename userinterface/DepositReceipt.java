@@ -57,12 +57,12 @@ public class DepositReceipt extends View
 		super(trans, "DepositReceipt");
 
 		Calendar todaysCalendar = Calendar.getInstance();	// creation date and time
-    		Date todaysDateAndTime = todaysCalendar.getTime();
+		Date todaysDateAndTime = todaysCalendar.getTime();
 
-	    	DateFormat theFormatter = DateFormat.getDateTimeInstance();
-    		todaysDateAndTimeString = theFormatter.format(todaysDateAndTime);
+		DateFormat theFormatter = DateFormat.getDateTimeInstance();
+		todaysDateAndTimeString = theFormatter.format(todaysDateAndTime);
 
-	    	// create a container for showing the contents
+		// create a container for showing the contents
 		VBox container = new VBox(10);
 		container.setPadding(new Insets(15, 5, 5, 5));
 
@@ -71,7 +71,7 @@ public class DepositReceipt extends View
 		container.getChildren().add(createFormContent());
 
 		getChildren().add(container);
-	
+
 		populateFields();
 
 	}
@@ -83,14 +83,14 @@ public class DepositReceipt extends View
 	{
 		HBox container = new HBox();
 		container.setAlignment(Pos.CENTER);
-		
+
 		Text titleText = new Text(" Brockport Bank ATM ");
 		titleText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		titleText.setWrappingWidth(300);
 		titleText.setTextAlignment(TextAlignment.CENTER);
 		titleText.setFill(Color.DARKGREEN);
 		container.getChildren().add(titleText);
-		
+
 		return container;
 	}
 
@@ -101,15 +101,15 @@ public class DepositReceipt extends View
 		VBox vbox = new VBox(10);
 
 		GridPane grid = new GridPane();
-        	grid.setAlignment(Pos.CENTER);
-       		grid.setHgap(10);
-        	grid.setVgap(10);
-        	grid.setPadding(new Insets(25, 25, 25, 25));
+		grid.setAlignment(Pos.CENTER);
+		grid.setHgap(10);
+		grid.setVgap(10);
+		grid.setPadding(new Insets(25, 25, 25, 25));
 
 		Text accountLabel = new Text("Account Number : ");
 		accountLabel.setWrappingWidth(150);
 		accountLabel.setTextAlignment(TextAlignment.RIGHT);
-		
+
 		grid.add(accountLabel, 0, 0);
 
 		accountNumber = new Text("                       ");
@@ -118,7 +118,7 @@ public class DepositReceipt extends View
 		Text amountDepositedLabel = new Text("Amount Deposited : ");
 		amountDepositedLabel.setWrappingWidth(150);
 		amountDepositedLabel.setTextAlignment(TextAlignment.RIGHT);
-		
+
 		grid.add(amountDepositedLabel, 0, 1);
 
 		amountDeposited = new Text("                       ");
@@ -141,21 +141,21 @@ public class DepositReceipt extends View
 		grid.add(currentBalance, 1, 3);
 
 		okButton = new Button("OK");
- 		okButton.setOnAction(new EventHandler<ActionEvent>() {
+		okButton.setOnAction(new EventHandler<ActionEvent>() {
 
-       		     @Override
-       		     public void handle(ActionEvent e) {
-			/**
-			 * Process the Cancel button.
-			 * The ultimate result of this action is that the transaction will tell the teller to
-			 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
-			 * It simply tells its model (controller) that the deposit receipt was seen, and leaves it
-			 * to the model to decide to tell the teller to do the switch back.
-	 		*/
-			//----------------------------------------------------------
-			myModel.stateChangeRequest("OK", null);   
-            	     }
-        	});
+			@Override
+			public void handle(ActionEvent e) {
+				/**
+				 * Process the Cancel button.
+				 * The ultimate result of this action is that the transaction will tell the teller to
+				 * to switch to the transaction choice view. BUT THAT IS NOT THIS VIEW'S CONCERN.
+				 * It simply tells its model (controller) that the deposit receipt was seen, and leaves it
+				 * to the model to decide to tell the teller to do the switch back.
+				 */
+				//----------------------------------------------------------
+				myModel.stateChangeRequest("OK", null);
+			}
+		});
 
 		HBox btnContainer = new HBox(100);
 		btnContainer.setAlignment(Pos.CENTER);
@@ -167,7 +167,7 @@ public class DepositReceipt extends View
 		return vbox;
 	}
 
-	
+
 
 	//-------------------------------------------------------------
 	public void populateFields()
